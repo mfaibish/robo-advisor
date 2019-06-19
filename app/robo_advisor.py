@@ -24,12 +24,11 @@ if __name__ == "__main__":
     while True:
         symbol = input("Please input a stock symbol (i.e. 'MSFT'): ")
         #symbols = [s for s in input("Please input a one or more stock symbols separated by a ',' (i.e. 'MSFT'): ").split(',')]
-        if len(symbol) > 4:
-            print("OOPS, YOU'VE ENTERED TOO MANY CHARACTERS. TRY AGAIN. ")
-        elif type(symbol) == int:
-            print("OOPS, YOUR SYBMOL SHOULD NOT CONTAIN ANY NUMBERS. ")
-        else:
+        if len(symbol) < 6 and symbol.isalpha():
             break
+        else:
+            print("OOPS, YOU'VE ENTERED TOO MANY CHARACTERS. TRY AGAIN. ")
+            next
         #for s in symbols:
 
     request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={api_key}"
@@ -42,16 +41,19 @@ if __name__ == "__main__":
     except:
        print("OOPS, stock symbol is invalid. Try again. ")
        exit()
+    
     last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
     request_at = datetime.datetime.today().strftime("%Y-%m-%d %I:%M %p")
     tsd = parsed_response["Time Series (Daily)"]
-    dates = sorted(list(tsd.keys()), reverse = True) 
+    dates = sorted(list(tsd.keys()), reverse = True)  #> sorting reference https://www.programiz.com/python-programming/methods/list/sort
     latest_day = dates[0]
     latest_close = tsd[latest_day]["4. close"]#> $1,000.00
+    
     # maximum of all high prices
     high_prices = []
     low_prices = []
-    # check latest 100?
+    
+
     for date in dates:
         high_price = tsd[date]["2. high"]
         high_prices.append(float(high_price))
@@ -59,6 +61,7 @@ if __name__ == "__main__":
         low_prices.append(float(low_price))
     recent_high = max(high_prices)
     recent_low = min(low_prices)
+    
     if float(latest_close) < float(recent_low * 1.2):
         recommend = "BUY!"
         reco_reason = "This stock is less than 20% above the recent low."
