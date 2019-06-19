@@ -1,7 +1,7 @@
 # robo-advisor
 
 ## SETUP
-### repo setup
+### Repo Setup
     1. Create new repository called robo-advisor (include gitignore file)
     2. Download repository to desktop
     3. After downloading the repo, navigate there from the command-line:
@@ -37,7 +37,7 @@
         requests
         python-dotenv
         ```
-### environment setup
+### Environment Setup
     1. Create and activate a new Anaconda virtual environment:
         ```sh
         conda create -n stocks-env python=3.7 # (first time only)
@@ -52,3 +52,17 @@
         ```sh
         python robo_advisor.py
         ```
+## Requirements 
+    1. Ensure the .env file is present in your .gitignore files created at the repository creation 
+    2. Create a data directory in the repo with another .gitignore file. Plase the following inside 
+        # data/.gitignore
+
+        # h/t: https://stackoverflow.com/a/5581995/670433
+
+        # ignore all files in this directory:
+        *
+
+        # except this gitignore file:
+        !.gitignore
+### Security Requirements
+    3. Create an AlphaVantage API key as a variable and place within a .env file in the repo. This will be "hidden" as part of the .gitignore file
