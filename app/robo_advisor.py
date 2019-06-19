@@ -38,7 +38,7 @@ last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
 request_at = datetime.datetime.today().strftime("%Y-%m-%d %I:%M %p")
 
 tsd = parsed_response["Time Series (Daily)"]
-dates = list(tsd.keys()) # SORT DATES
+dates = sorted(list(tsd.keys()), reverse = True) 
 latest_day = dates[0]
 latest_close = tsd[latest_day]["4. close"]#> $1,000.00
 
