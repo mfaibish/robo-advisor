@@ -60,24 +60,17 @@ csv_headers = ["timestamp", "open", "high", "low", "close", "volume"]
 with open(csv_file_path, "w") as csv_file: # "w" means "open the file for writing"
     writer = csv.DictWriter(csv_file, fieldnames=csv_headers)
     writer.writeheader() # uses fieldnames set above
-    
-    #looping
-    writer.writerow({
-        "timestamp": "TODO", 
-        "open": "TODO", 
-        "high": "TODO", 
-        "low": "TODO", 
-        "close": "TODO", 
-        "volume": "TODO"   
-    })
-    writer.writerow({
-        "timestamp": "TODO", 
-        "open": "TODO", 
-        "high": "TODO", 
-        "low": "TODO", 
-        "close": "TODO", 
-        "volume": "TODO"   
-    })
+    for date in dates:
+        daily_prices = tsd[date]
+        writer.writerow({
+            "timestamp": date , 
+            "open": to_usd(float(daily_prices["1. open"])), 
+            "high": to_usd(float(daily_prices["2. high"])), 
+            "low": to_usd(float(daily_prices["3. low"])), 
+            "close": to_usd(float(daily_prices["4. close"])), 
+            "volume": daily_prices["5. volume"]   
+        })
+
 print("-------------------------")
 print("SELECTED SYMBOL: XYZ")
 print("-------------------------")
