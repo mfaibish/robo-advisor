@@ -59,8 +59,10 @@ recent_low = min(low_prices)
 
 if float(latest_close) < float(recent_low * 1.2):
     recommend = "BUY!"
+    reco_reason = "This stock is less than 20% above the recent low."
 else:
     recommend = "PASS"
+    reco_reason = "This stock is too high to buy right now."
 #
 # INFO OUTPUTS
 #
@@ -95,7 +97,7 @@ print(f"RECENT HIGH: {to_usd(float(recent_high))}")
 print(f"RECENT LOW: {to_usd(float(recent_low))}")
 print("-------------------------")
 print(f"RECOMMENDATION: {recommend}")
-print("RECOMMENDATION REASON: TODO")
+print(f"RECOMMENDATION REASON: {reco_reason}")
 print("-------------------------")
 print(f"WRITING DATA TO CSV {csv_file_path}...")
 print("-------------------------")
