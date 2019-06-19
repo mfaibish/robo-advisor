@@ -21,10 +21,16 @@ response = requests.get(request_url)
 parsed_response = json.loads(response.text)
 
 last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
-today = datetime.datetime.today()
-request_at = today.strftime("%Y-%m-%d %I:%M %p")
-latest_close = parsed_response["Time Series (Daily)"]["2019-06-18"]["4. close"]#> $1,000.00
+
+request_at = datetime.datetime.today().strftime("%Y-%m-%d %I:%M %p")
+
 #breakpoint()
+
+tsd = parsed_response["Time Series (Daily)"]
+dates = list(tsd.keys()) # SORT DATES
+latest_day = dates[0]
+latest_close = tsd[latest_day]["4. close"]#> $1,000.00
+
 
 #
 # INFO OUTPUTS
