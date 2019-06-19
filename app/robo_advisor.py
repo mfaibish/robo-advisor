@@ -18,14 +18,19 @@ def to_usd(my_price):
 # INFO INPUTS
 #
 api_key = os.environ.get("ALPHAVANTAGE_API_KEY", "demo")
-print(api_key)
-symbol = input("Please input a stock symbol (i.e. 'MSFT'): ")
+symbol = input("Please input a stock symbol (i.e. 'MSFT'): ") 
+
 request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={api_key}"
 
 response = requests.get(request_url)
 
-
 parsed_response = json.loads(response.text)
+
+try:
+   parsed_response['Time Series (Daily)']
+except:
+   print("OOPS, stock symbol is invalid. Try again. ")
+   exit()
 
 last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
 
