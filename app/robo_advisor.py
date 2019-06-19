@@ -25,8 +25,9 @@ request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&sym
 response = requests.get(request_url)
 
 parsed_response = json.loads(response.text)
-
+#tsd = parsed_response["Time Series (Daily)"]
 try:
+   #tsd
    parsed_response['Time Series (Daily)']
 except:
    print("OOPS, stock symbol is invalid. Try again. ")
@@ -55,6 +56,11 @@ for date in dates:
 
 recent_high = max(high_prices)
 recent_low = min(low_prices)
+
+if float(latest_close) < float(recent_low * 1.2):
+    recommend = "BUY!"
+else:
+    recommend = "PASS"
 #
 # INFO OUTPUTS
 #
@@ -88,7 +94,7 @@ print(f"LATEST CLOSE: {to_usd(float(latest_close))}")
 print(f"RECENT HIGH: {to_usd(float(recent_high))}")
 print(f"RECENT LOW: {to_usd(float(recent_low))}")
 print("-------------------------")
-print("RECOMMENDATION: BUY!")
+print(f"RECOMMENDATION: {recommend}")
 print("RECOMMENDATION REASON: TODO")
 print("-------------------------")
 print(f"WRITING DATA TO CSV {csv_file_path}...")
