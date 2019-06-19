@@ -3,6 +3,7 @@
 import json 
 import datetime
 import csv
+import os
 
 import requests
 
@@ -52,10 +53,35 @@ recent_low = min(low_prices)
 # INFO OUTPUTS
 #
 
+csv_file_path = os.path.join(os.path.dirname(__file__), "..", "data", "prices.csv") # a relative filepath
+
+csv_headers = ["timestamp", "open", "high", "low", "close", "volume"]
+
+with open(csv_file_path, "w") as csv_file: # "w" means "open the file for writing"
+    writer = csv.DictWriter(csv_file, fieldnames=csv_headers)
+    writer.writeheader() # uses fieldnames set above
+    
+    #looping
+    writer.writerow({
+        "timestamp": "TODO", 
+        "open": "TODO", 
+        "high": "TODO", 
+        "low": "TODO", 
+        "close": "TODO", 
+        "volume": "TODO"   
+    })
+    writer.writerow({
+        "timestamp": "TODO", 
+        "open": "TODO", 
+        "high": "TODO", 
+        "low": "TODO", 
+        "close": "TODO", 
+        "volume": "TODO"   
+    })
 print("-------------------------")
 print("SELECTED SYMBOL: XYZ")
 print("-------------------------")
-print("REQUESTING STOCK MARKET DATA...")
+print("REQUESTING STOCK MARKET DATA")
 print(f"REQUEST AT: {request_at}")
 print("-------------------------")
 print(f"LATEST DAY: {last_refreshed}")
@@ -66,19 +92,8 @@ print("-------------------------")
 print("RECOMMENDATION: BUY!")
 print("RECOMMENDATION REASON: TODO")
 print("-------------------------")
-print("WRITING DATA TO CSV...")
+print(f"WRITING DATA TO CSV {csv_file_path}...")
 print("-------------------------")
 print("HAPPY INVESTING!")
 print("-------------------------")
 
-import csv
-
-csv_file_path = "data/prices.csv" # a relative filepath
-
-with open(csv_file_path, "w") as csv_file: # "w" means "open the file for writing"
-    writer = csv.DictWriter(csv_file, fieldnames=["city", "name"])
-    writer.writeheader() # uses fieldnames set above
-    writer.writerow({"city": "New York", "name": "Yankees"})
-    writer.writerow({"city": "New York", "name": "Mets"})
-    writer.writerow({"city": "Boston", "name": "Red Sox"})
-    writer.writerow({"city": "New Haven", "name": "Ravens"})
