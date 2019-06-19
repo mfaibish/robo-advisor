@@ -1,8 +1,10 @@
 # app/robo_advisor.py
 
-import requests
 import json 
 import datetime
+import csv
+
+import requests
 
 
 # convert to usd formatting
@@ -12,6 +14,9 @@ def to_usd(my_price):
 #
 # INFO INPUTS
 #
+
+
+
 
 request_url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=demo"
 
@@ -34,6 +39,7 @@ latest_close = tsd[latest_day]["4. close"]#> $1,000.00
 high_prices = []
 low_prices = []
 
+# check latest 100?
 for date in dates:
     high_price = tsd[date]["2. high"]
     high_prices.append(float(high_price))
@@ -60,5 +66,19 @@ print("-------------------------")
 print("RECOMMENDATION: BUY!")
 print("RECOMMENDATION REASON: TODO")
 print("-------------------------")
+print("WRITING DATA TO CSV...")
+print("-------------------------")
 print("HAPPY INVESTING!")
 print("-------------------------")
+
+import csv
+
+csv_file_path = "data/prices.csv" # a relative filepath
+
+with open(csv_file_path, "w") as csv_file: # "w" means "open the file for writing"
+    writer = csv.DictWriter(csv_file, fieldnames=["city", "name"])
+    writer.writeheader() # uses fieldnames set above
+    writer.writerow({"city": "New York", "name": "Yankees"})
+    writer.writerow({"city": "New York", "name": "Mets"})
+    writer.writerow({"city": "Boston", "name": "Red Sox"})
+    writer.writerow({"city": "New Haven", "name": "Ravens"})
