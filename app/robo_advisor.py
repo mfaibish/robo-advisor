@@ -24,14 +24,23 @@ last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
 
 request_at = datetime.datetime.today().strftime("%Y-%m-%d %I:%M %p")
 
-#breakpoint()
-
 tsd = parsed_response["Time Series (Daily)"]
 dates = list(tsd.keys()) # SORT DATES
 latest_day = dates[0]
 latest_close = tsd[latest_day]["4. close"]#> $1,000.00
 
+# maximum of all high prices
 
+
+#high_prices = [10, 20, 30, 5]
+#recent_high = max(high_prices)
+
+high_prices = []
+for date in dates:
+    high_price = tsd[date]["2. high"]
+    high_prices.append(float(high_price))
+
+recent_high = max(high_prices)
 #
 # INFO OUTPUTS
 #
@@ -44,7 +53,7 @@ print(f"REQUEST AT: {request_at}")
 print("-------------------------")
 print(f"LATEST DAY: {last_refreshed}")
 print(f"LATEST CLOSE: {to_usd(float(latest_close))}")
-print("RECENT HIGH: $101,000.00")
+print(f"RECENT HIGH: {to_usd(float(recent_high))}")
 print("RECENT LOW: $99,000.00")
 print("-------------------------")
 print("RECOMMENDATION: BUY!")
