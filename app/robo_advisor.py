@@ -22,12 +22,12 @@ if __name__ == "__main__":
     api_key = os.environ.get("ALPHAVANTAGE_API_KEY", "demo")
 
     while True:
-        symbol = input("Please input a stock symbol (i.e. 'MSFT'): ")
+        symbol = input("Please input a stock symbol (i.e. 'MSFT'): ").upper()
         #symbols = [s for s in input("Please input a one or more stock symbols separated by a ',' (i.e. 'MSFT'): ").split(',')]
         if len(symbol) < 6 and symbol.isalpha():
             break
         else:
-            print("OOPS, YOU'VE ENTERED TOO MANY CHARACTERS. TRY AGAIN. ")
+            print("OOPS, YOU'VE ENTERED AN INVALID SYMBOL. TRY AGAIN.")
             next
         #for s in symbols:
 
