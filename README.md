@@ -72,6 +72,7 @@
    ```sh
    python robo_advisor.py
    ```
+    A list of prices will export to a csv file after a successful run of the code and a printout today's prices should display.
 
 ## TESTING
     5. run tests by running pytest in the terminal

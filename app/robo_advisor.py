@@ -27,17 +27,19 @@ if __name__ == "__main__":
         if len(symbol) < 6 and symbol.isalpha():
             break
         else:
-            print("OOPS, YOU'VE ENTERED AN INVALID SYMBOL. TRY AGAIN.")
+            print("OOPS, YOU'VE ENTERED AN IMPROPERLY FORMATED SYMBOL. TRY SOMETHING LIKE 'MSFT'")
             next
         #for s in symbols:
 
     request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={api_key}"
     response = requests.get(request_url)
     parsed_response = json.loads(response.text)
+    
+    # Credit: Harrison Grubb in Slack
     try:
        parsed_response['Time Series (Daily)']
     except:
-       print("OOPS, stock symbol is invalid. Try again. ")
+       print("OOPS, STOCK SYMBOL IS INVALID. TRY AGAIN ")
        exit()
     
     last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
