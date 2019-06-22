@@ -34,9 +34,7 @@ if __name__ == "__main__":
     request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={api_key}"
     response = requests.get(request_url)
     parsed_response = json.loads(response.text)
-    #tsd = parsed_response["Time Series (Daily)"]
     try:
-       #tsd
        parsed_response['Time Series (Daily)']
     except:
        print("OOPS, stock symbol is invalid. Try again. ")

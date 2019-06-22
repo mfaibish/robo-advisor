@@ -66,3 +66,15 @@
         !.gitignore
 ### Security Requirements
     3. Create an AlphaVantage API key as a variable and place within a .env file in the repo. This will be "hidden" as part of the .gitignore file
+
+## USAGAE
+    4. Execute the code by running 
+   ```sh
+   python robo_advisor.py
+   ```
+
+## TESTING
+    5. run tests by running pytest in the terminal
+    ``` sh
+    pytest
+    ```
